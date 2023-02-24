@@ -11,9 +11,6 @@ const char dead_cell{' '};
 // The “normal” size for a terminal is 80 columns by 24 rows.
 // An ANSI terminal starts with 1, and not 0;
 // Escape char = \x1b
-const int row_count = 24;
-const int col_count = 80;
-
 const int row_max = 23;
 const int col_max = 79;
 

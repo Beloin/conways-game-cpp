@@ -21,8 +21,8 @@ int main(int n, char **args) {
         current.draw();
 
         // If we want to keep step by step
-        key = std::cin.get();
-        if (key == 'q') {
+        std::cin.get(key);
+        if (key == 'q' || key == 81) {
             return 0;
         }
 
