@@ -23,7 +23,7 @@ Grid::Grid() {
 
 // In randomize we don't try to random for each, but we try to random whose will be alive in the start;
 void Grid::randomize() {
-    int quantity = (int) generateRandomNumber(20, row_max * col_max / 5);
+    int quantity = (int) generateRandomNumber(20, (row_max * col_max) / 2);
 
     for (int i = 0; i < quantity; i++) {
         int cell = (int) generateRandomNumber(row_max * col_max);

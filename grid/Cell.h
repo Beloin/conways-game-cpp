@@ -29,11 +29,6 @@ public:
         return !alive;
     }
 
-    void setAlive(bool new_alive) {
-        this->alive = new_alive;
-    }
-
-
 };
 
 

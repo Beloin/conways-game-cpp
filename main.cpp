@@ -8,8 +8,11 @@
 
 int main(int n, char **args) {
     std::cout << "Welcome to Conway's game of Life" << std::endl;
-    std::cout << "Please, next we have configurations:" << std::endl;
     // TODO: Add configurations
+//    std::cout << "Please, next we have configurations:" << std::endl;
+    std::cout
+            << "Remember, press \"Enter\" each time to go through generations. You can keep enter pressed to go faster."
+            << std::endl;
     std::cout << "Please, press enter to start." << std::endl;
     std::cin.get();
 
@@ -28,7 +31,7 @@ int main(int n, char **args) {
         if (key == 'q' || key == 81) {
             break;
         }
-//        usleep(1000000); // 1 -> 1_000_000
+//        usleep(500000); // 1 -> 1_000_000
         next.calculate(current);
 
         current.copy(next);
