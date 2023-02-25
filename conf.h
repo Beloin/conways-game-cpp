@@ -17,6 +17,7 @@ const int col_max = 79;
 
 const int min_neighbours = 2;
 const int max_neighbours = 3;
+
 const int min_parents = 3;
 const int max_parents = 3;
 

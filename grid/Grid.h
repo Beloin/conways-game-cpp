@@ -15,9 +15,9 @@ private:
     Cell *grid;
     int size = (row_max + 2) * (col_max + 2);
 
-    unsigned long generateRandomNumber(unsigned int upper_limit);
+    static unsigned long generateRandomNumber(unsigned int upper_limit);
 
-    unsigned long generateRandomNumber(unsigned int lower_limit, unsigned int upper_limit);
+    static unsigned long generateRandomNumber(unsigned int lower_limit, unsigned int upper_limit);
 
     static int getIndex(int row, int column) ;
 
@@ -31,7 +31,6 @@ public:
 
     void draw();
 
-    // update
     void copy(const Grid &other);
 
     void create(int row, int col);

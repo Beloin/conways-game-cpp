@@ -13,15 +13,12 @@ private:
 
 public:
     Cell() : alive(false) {}
+    Cell(const Cell &cell) = default;
 
     void draw(int row, int col) const;
 
     void bring_me_to_life() {
         alive = true;
-    }
-
-    void die() {
-        alive = false;
     }
 
     bool isAlive() const {

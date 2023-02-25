@@ -6,7 +6,10 @@
 #include <iostream>
 #include <functional>
 #include "Grid.h"
+
 std::random_device random_dev;
+//std::mt19937 rng = std::mt19937(565);
+std::mt19937 rng = std::mt19937(random_dev());
 
 Grid::Grid() {
     // TODO: Why two? If we are missing only one
@@ -20,10 +23,9 @@ Grid::Grid() {
 
 // In randomize we don't try to random for each, but we try to random whose will be alive in the start;
 void Grid::randomize() {
-    // TODO: what about the place where theres is no cell fisrt row, last row, first column, last column
-    int quantity = (int) generateRandomNumber(20, 200);
+    int quantity = (int) generateRandomNumber(20, row_max * col_max / 5);
 
-    for (int i = quantity; i < quantity; i++) {
+    for (int i = 0; i < quantity; i++) {
         int cell = (int) generateRandomNumber(row_max * col_max);
         grid[cell].bring_me_to_life();
     }
@@ -33,18 +35,12 @@ void Grid::randomize() {
 unsigned long Grid::generateRandomNumber(unsigned int upper_limit) {
     std::uniform_int_distribution<std::mt19937::result_type> dist =
             std::uniform_int_distribution<std::mt19937::result_type>(0, upper_limit);
-    std::mt19937 rng = std::mt19937(1);
-//    std::mt19937 rng = std::mt19937(random_dev());
-
     return dist(rng);
 }
 
 unsigned long Grid::generateRandomNumber(unsigned int lower_limit, unsigned int upper_limit) {
     std::uniform_int_distribution<std::mt19937::result_type> dist =
             std::uniform_int_distribution<std::mt19937::result_type>(lower_limit, upper_limit);
-    std::mt19937 rng = std::mt19937(1);
-//    std::mt19937 rng = std::mt19937(random_dev());
-
     return dist(rng);
 }
 
@@ -55,8 +51,8 @@ Grid::~Grid() {
 void Grid::draw() {
     std::cout << "\x1b[2J"; // Clears screen
 
-    for (int i = 0; i < row_max; ++i) {
-        for (int j = 0; j < col_max; ++j) {
+    for (int i = 0; i < row_max + 2; ++i) {
+        for (int j = 0; j < col_max + 2; ++j) {
             grid[(i * col_max) + j].draw(i, j);
         }
     }
@@ -67,11 +63,10 @@ void Grid::copy(const Grid &other) {
     for (int i = 0; i < row_max; ++i) {
         for (int j = 0; j < col_max; ++j) {
             int index = (i * col_max) + j;
-            // TODO: So.. this copy or what?
+            // This copy the other_cell into current_cell location
             Cell *current_cell = &grid[index];
             Cell other_cell = other.grid[index];
-            *current_cell = other_cell; // TODO: This makes a copy of other_cell inside current_cell?
-//            current_cell.setAlive(other_cell.isAlive());
+            *current_cell = other_cell;
         }
     }
 }
@@ -117,7 +112,7 @@ bool Grid::will_survive(int row, int col) const {
     //  *  [X]  *
     //  *   *   *
     row_t = row - 1;
-    col_t = col;
+    col_t = col + 1;
     living_neighbours += grid[getIndex(row_t, col_t)].isAlive();
 
     //  *   *  *
@@ -161,7 +156,7 @@ bool Grid::will_survive(int row, int col) const {
 }
 
 bool Grid::will_create(int row, int col) const {
-    if (grid[getIndex(row, col)].isDead()) {
+    if (grid[getIndex(row, col)].isAlive()) {
         return false;
     }
 
@@ -189,7 +184,7 @@ bool Grid::will_create(int row, int col) const {
     //  *  [X]  *
     //  *   *   *
     row_t = row - 1;
-    col_t = col;
+    col_t = col + 1;
     parents += grid[getIndex(row_t, col_t)].isAlive();
 
     //  *   *  *
