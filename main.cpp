@@ -12,22 +12,27 @@ int main(int n, char **args) {
     std::cin.get();
 
     Grid current;
-    Grid next;
     char key;
 
     current.randomize();
 
     while (true) {
+        Grid next;
+
         current.draw();
 
         // If we want to keep step by step
         std::cin.get(key);
         if (key == 'q' || key == 81) {
-            return 0;
+            break;
         }
 
         next.calculate(current);
 
         current.copy(next);
     }
+
+    std::cout << "\x1b[" << ";" << row_max - 1 << "H";
+
+    return 0;
 }

@@ -7,6 +7,7 @@
 
 
 #include "Cell.h"
+#include "random"
 #include "../conf.h"
 
 class Grid {
@@ -14,18 +15,17 @@ private:
     Cell *grid;
     int size = (row_max + 2) * (col_max + 2);
 
-    std::random_device dev;
-    std::mt19937 rng;
-
     unsigned long generateRandomNumber(unsigned int upper_limit);
 
     unsigned long generateRandomNumber(unsigned int lower_limit, unsigned int upper_limit);
 
-    ~Grid();
+    static int getIndex(int row, int column) ;
 
 public:
 
     Grid();
+
+    ~Grid();
 
     void randomize();
 
@@ -34,11 +34,13 @@ public:
     // update
     void copy(const Grid &other);
 
+    void create(int row, int col);
+
     void calculate(const Grid &other);
 
-    bool will_survive(int row, int col);
+    bool will_survive(int row, int col) const;
 
-    bool will_create(int row, int col);
+    bool will_create(int row, int col) const;
 };
 
 

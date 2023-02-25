@@ -6,7 +6,7 @@
 #include "iostream"
 #include "../conf.h"
 
-void Cell::draw(int row, int col) {
+void Cell::draw(int row, int col) const {
     // TODO: Could put this platform specific code elsewhere.
     // Commands in ANSI terminal starts with 1.
     std::cout << "\x1b[" << row + 1 << ";" << col + 1 << "H";

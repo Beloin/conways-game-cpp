@@ -14,7 +14,7 @@ private:
 public:
     Cell() : alive(false) {}
 
-    void draw(int row, int col);
+    void draw(int row, int col) const;
 
     void bring_me_to_life() {
         alive = true;
@@ -24,9 +24,19 @@ public:
         alive = false;
     }
 
-    bool is_alive() const {
+    bool isAlive() const {
         return alive;
     }
+
+    bool isDead() const {
+        return !alive;
+    }
+
+    void setAlive(bool new_alive) {
+        this->alive = new_alive;
+    }
+
+
 };
 
 
