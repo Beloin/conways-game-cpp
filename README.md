@@ -19,7 +19,4 @@ The main objective is to show a "Simulation" of the Conway's Game.
  - Velocity conf
  - Size (W*H) conf
 
-
-<video>
-<source src="./assets/out2.mp4" type="video/mp4">
-</video>
+<img src="./assets/file.gif">
