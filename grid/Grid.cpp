@@ -23,10 +23,11 @@ Grid::Grid() {
 
 // In randomize we don't try to random for each, but we try to random whose will be alive in the start;
 void Grid::randomize() {
-    int quantity = (int) generateRandomNumber(20, (row_max * col_max) / 2);
+    int max_index = row_max * col_max;
+    int quantity = (int) generateRandomNumber((unsigned int) (max_index * .1), max_index / 2);
 
     for (int i = 0; i < quantity; i++) {
-        int cell = (int) generateRandomNumber(row_max * col_max);
+        int cell = (int) generateRandomNumber(max_index);
         grid[cell].bring_me_to_life();
     }
 
@@ -72,11 +73,9 @@ void Grid::copy(const Grid &other) {
 }
 
 void Grid::calculate(const Grid &other) {
-    for (int row = 0; row < row_max; ++row) {
-        for (int col = 0; col < col_max; ++col) {
-            if (other.will_survive(row, col)) {
-                this->create(row, col);
-            } else if (other.will_create(row, col)) {
+    for (int row = 1; row < row_max - 1; ++row) {
+        for (int col = 1; col < col_max - 1; ++col) {
+            if (other.will_survive(row, col) || other.will_create(row, col)) {
                 this->create(row, col);
             }
         }

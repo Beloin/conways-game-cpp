@@ -31,8 +31,12 @@ int main(int n, char **args) {
         if (key == 'q' || key == 81) {
             break;
         }
+        if (key == 'r') {
+            next.randomize();
+        } else {
+            next.calculate(current);
+        }
 //        usleep(500000); // 1 -> 1_000_000
-        next.calculate(current);
 
         current.copy(next);
     }
